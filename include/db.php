@@ -9,7 +9,7 @@
 		}
 
 		function init() {
-			$this->db->exec('CREATE  TABLE IF NOT EXISTS calls ("CallSid" TEXT PRIMARY KEY  NOT NULL  UNIQUE , "DateCreated" DATETIME, "Direction" TEXT, "CallStatus" TEXT, "CallTo" TEXT, "CallFrom" TEXT, "Status" TEXT, "StartTime" DATETIME, "EndTime" DATETIME, "Duration" INTEGER,  "DialCallSid" TEXT, "DialCallStatus" TEXT, "DialCallDuration" INTEGER);');
+			$this->db->exec('CREATE  TABLE IF NOT EXISTS calls ("CallSid" TEXT PRIMARY KEY  NOT NULL  UNIQUE , "DateCreated" DATETIME, "Direction" TEXT, "CallStatus" TEXT, "CallTo" TEXT, "CallFrom" TEXT, "Status" TEXT, "StartTime" DATETIME, "EndTime" DATETIME, "DialCallSid" TEXT, "DialCallStatus" TEXT);');
 		}
 	
 		function save_call() {
