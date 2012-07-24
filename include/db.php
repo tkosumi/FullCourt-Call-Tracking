@@ -14,7 +14,7 @@
 	
 		function save_call() {
 
-		  if ($_POST['To'] != '') {
+		  if ($_REQUEST['To'] != '') {
 			  //https://www.fullcourt.co/ja/docs/PhoneXML/request
 		  	$CallTo = $_REQUEST['To'];
 		  	$CallFrom=$_REQUEST['From'];
