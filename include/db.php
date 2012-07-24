@@ -30,7 +30,7 @@
 				$stmt->execute($vars);
 		  } 
 
-		functon saved_call() {
+		function saved_call() {
 			  //https://www.fullcourt.co/ja/docs/PhoneXML/request
 		  	$DialCallDuration=$_POST['variable_billsec'];
 				$CallSid = $_POST['CallUUID'];
