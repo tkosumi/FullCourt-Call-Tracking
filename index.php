@@ -37,9 +37,6 @@
 			            <th scope="col" class="rounded-q1">Campaign</th>
 			            <th scope="col" class="rounded-q1">From</th>
 			            <th scope="col" class="rounded-q1">To</th>
-			            <th scope="col" class="rounded-q1">From City</th>
-			            <th scope="col" class="rounded-q1">From State</th>
-			            <th scope="col" class="rounded-q1">From Zip</th>
 			            <th scope="col" class="rounded-q1">Duration (seconds)</th>
 			            <th scope="col" class="rounded-q1">Agent Call</th>
 			            <th scope="col" class="rounded-q4">Recording</th>
@@ -59,9 +56,6 @@
 						echo("<td>" . $campaign . "</td>");
 						echo("<td>" . $call['CallFrom']. "</td>");
 						echo("<td>" . $call['CallTo']. "</td>");
-						echo("<td>" . $call['FromCity']. "</td>");
-						echo("<td>" . $call['FromState']. "</td>");
-						echo("<td>" . $call['FromZip']. "</td>");
 						echo("<td>" . $call['DialCallDuration']. "</td>");
 						echo("<td>" . $call['DialCallStatus']. "</td>");
 						if ($call['RecordingUrl']!="")
