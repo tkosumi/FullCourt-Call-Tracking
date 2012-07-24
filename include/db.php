@@ -23,9 +23,10 @@
 		  	$CallerName=$_REQUEST['CallerName'];
 		  	$CallSid = $_REQUEST['CallUUID'];
 		  	$CallStatus=$_REQUEST['CallStatus'];
+		  	$DialCallSid='';
 
-  			$stmt = $this->db->prepare('INSERT INTO calls (DateCreated,CallSid,CallFrom,CallTo,CallStatus,Direction,CallerName,DialCallDuration) VALUES (DATETIME(\'now\',\'localtime\'),?,?,?,?,?,?,?)');
-		  	$vars=array($CallSid,$CallFrom,$CallTo,$CallStatus,$Direction,$CallerName,$DialCallDuration);
+  			$stmt = $this->db->prepare('INSERT INTO calls (DateCreated,CallSid,CallFrom,CallTo,CallStatus,Direction,CallerName,DialCallDuration,DialCallSid) VALUES (DATETIME(\'now\',\'localtime\'),?,?,?,?,?,?,?,?)');
+		  	$vars=array($CallSid,$CallFrom,$CallTo,$CallStatus,$Direction,$CallerName,$DialCallDuration,$DialCallSid);
 				$stmt->execute($vars);
 		  } else {
 		  	$DialCallDuration=$_POST['variable_billsec'];
