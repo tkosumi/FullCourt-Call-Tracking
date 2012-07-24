@@ -14,34 +14,32 @@
 	
 		function save_call() {
 
-		  if ($_REQUEST['To'] != '') {
-			  //https://www.fullcourt.co/ja/docs/PhoneXML/request
-		  	$CallTo = $_REQUEST['To'];
-		  	$CallFrom=$_REQUEST['From'];
-		  	$DialCallDuration=$_REQUEST['variable_billsec'];
-		  	$Direction=$_REQUEST['Direction'];
-		  	$CallerName=$_REQUEST['CallerName'];
-		  	$CallSid = $_REQUEST['CallUUID'];
-		  	$CallStatus=$_REQUEST['CallStatus'];
-		  	$DialCallSid='';
+		  //https://www.fullcourt.co/ja/docs/PhoneXML/request
+	  	$CallTo = $_REQUEST['To'];
+	  	$CallFrom=$_REQUEST['From'];
+	  	$DialCallDuration=$_REQUEST['variable_billsec'];
+		 	$Direction=$_REQUEST['Direction'];
+		 	$CallerName=$_REQUEST['CallerName'];
+		 	$CallSid = $_REQUEST['CallUUID'];
+	  	$CallStatus=$_REQUEST['CallStatus'];
+	  	$DialCallSid='';
 
-  			$stmt = $this->db->prepare('INSERT INTO calls (DateCreated,CallSid,CallFrom,CallTo,CallStatus,Direction,CallerName,DialCallDuration,DialCallSid) VALUES (DATETIME(\'now\',\'localtime\'),?,?,?,?,?,?,?,?)');
-		  	$vars=array($CallSid,$CallFrom,$CallTo,$CallStatus,$Direction,$CallerName,$DialCallDuration,$DialCallSid);
-				$stmt->execute($vars);
-		  } 
+  		$stmt = $this->db->prepare('INSERT INTO calls (DateCreated,CallSid,CallFrom,CallTo,CallStatus,Direction,CallerName,DialCallDuration,DialCallSid) VALUES (DATETIME(\'now\',\'localtime\'),?,?,?,?,?,?,?,?)');
+	  	$vars=array($CallSid,$CallFrom,$CallTo,$CallStatus,$Direction,$CallerName,$DialCallDuration,$DialCallSid);
+			$stmt->execute($vars);
+	  } 
 
 		function saved_call() {
-			  //https://www.fullcourt.co/ja/docs/PhoneXML/request
-		  	$DialCallDuration=$_POST['variable_billsec'];
-				$CallSid = $_POST['CallUUID'];
-			  $DialCallSid=$_POST['DialBlegUUID'];
-			  $CallStatus=$_POST['DialBLegStatus'];
-			  $DialCallStatus=$_POST['DialBLegHangupCause'];
+		  //https://www.fullcourt.co/ja/docs/PhoneXML/dial
+	  	$DialCallDuration=$_POST['variable_billsec'];
+			$CallSid = $_POST['CallUUID'];
+		  $DialCallSid=$_POST['DialBlegUUID'];
+		  $CallStatus=$_POST['DialBLegStatus'];
+		  $DialCallStatus=$_POST['DialBLegHangupCause'];
 
-			  $stmt = $this->db->prepare('UPDATE calls set DialCallSid=?, DialCallStatus=?, DialCallDuration=?, CallStatus=? WHERE CallSid=?');
-			  $vars=array($DialCallSid, $DialCallStatus, $DialCallDuration, $CallStatus, $CallSid);
-				$stmt->execute($vars);
-      }
+		  $stmt = $this->db->prepare('UPDATE calls set DialCallSid=?, DialCallStatus=?, DialCallDuration=?, CallStatus=? WHERE CallSid=?');
+		  $vars=array($DialCallSid, $DialCallStatus, $DialCallDuration, $CallStatus, $CallSid);
+			$stmt->execute($vars);
 		}
 
 		function get_calls(){
