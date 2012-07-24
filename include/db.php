@@ -9,30 +9,35 @@
 		}
 
 		function init() {
-			$this->db->exec('CREATE  TABLE IF NOT EXISTS calls ("CallSid" TEXT PRIMARY KEY  NOT NULL  UNIQUE , "DateCreated" DATETIME, "Direction" TEXT, "CallStatus" TEXT, "CallTo" TEXT, "CallFrom" TEXT, "Status" TEXT, "StartTime" DATETIME, "EndTime" DATETIME, "DialCallSid" TEXT, "DialCallStatus" TEXT);');
+			$this->db->exec('CREATE  TABLE IF NOT EXISTS calls ("CallSid" TEXT PRIMARY KEY  NOT NULL  UNIQUE , "DateCreated" DATETIME, "Direction" TEXT, "CallStatus" TEXT, "CallTo" TEXT, "CallFrom" TEXT, "Status" TEXT, "StartTime" DATETIME, "EndTime" DATETIME, "DialCallSid" TEXT, "DialCallStatus" TEXT, "CallerName" TEXT, "DialCallDuration" INTEGER);');
 		}
 	
 		function save_call() {
 
-			if ($_POST['DialBLegHangupCause'] != '') {
-				$CallSid = $_POST['DialALegUUID'];
+		  if ($_POST['To'] != '') {
+			  //https://www.fullcourt.co/ja/docs/PhoneXML/request
+		  	$CallTo = $_REQUEST['To'];
+		  	$CallFrom=$_REQUEST['From'];
+		  	$DialCallDuration=$_REQUEST['variable_billsec'];
+		  	$Direction=$_REQUEST['Direction'];
+		  	$CallerName=$_REQUEST['CallerName'];
+		  	$CallSid = $_REQUEST['CallUUID'];
+		  	$CallStatus=$_REQUEST['CallStatus'];
+
+  			$stmt = $this->db->prepare('INSERT INTO calls (DateCreated,CallSid,CallFrom,CallTo,CallStatus,Direction,CallerName,DialCallDuration) VALUES (DATETIME(\'now\',\'localtime\'),?,?,?,?,?,?,?)');
+		  	$vars=array($CallSid,$CallFrom,$CallTo,$CallStatus,$Direction,$CallerName,$DialCallDuration);
+			  $stmt->execute($vars);
+		  } else {
+		  	$DialCallDuration=$_REQUEST['variable_billsec'];
+				$CallSid = $_POST['CallUUID'];
 			  $DialCallSid=$_POST['DialBlegUUID'];
+			  $CallStatus=$_POST['DialBLegStatus'];
 			  $DialCallStatus=$_POST['DialBLegHangupCause'];
 
-			  $stmt = $this->db->prepare('UPDATE calls set DialCallSid=?, DialCallStatus=? WHERE CallSid=?');
-			  $stmt->execute(array($DialCallSid, $DialCallStatus, $CallSid));
-			} else {
-			  //https://www.fullcourt.co/ja/docs/PhoneXML/request
-			  $CallSid = $_POST['CallUUID'];
-			  $CallFrom=$_POST['From'];
-			  $CallTo=$_POST['To'];
-			  $CallStatus=$_POST['CallStatus'];
-			  $Direction=$_POST['Direction'];
+			  $stmt = $this->db->prepare('UPDATE calls set DialCallSid=?, DialCallStatus=?, DialCallDuration=?, CallStatus=? WHERE CallSid=?');
+			  $vars=array($DialCallSid, $DialCallStatus, $DialCallDuration, $CallSid, $CallStatus);
+				$stmt->execute($vars);
       }
-
-			$stmt = $this->db->prepare('INSERT INTO calls (DateCreated,CallSid,CallFrom,CallTo,CallStatus,Direction) VALUES (DATETIME(\'now\',\'localtime\'),?,?,?,?,?)');
-			$vars=array($CallSid,$CallFrom,$CallTo,$CallStatus,$Direction);
-			$stmt->execute($vars);
 		}
 
 		function get_calls(){
