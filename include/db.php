@@ -13,28 +13,28 @@
 		}
 	
 		function save_call() {
-			//https://www.fullcourt.co/ja/docs/PhoneXML/request
-			$CallSid = $_REQUEST['CallUUID'];
-			$CallFrom=$_REQUEST['From'];
-			$CallTo=$_REQUEST['To'];
-			$CallStatus=$_REQUEST['CallStatus'];
-			$Direction=$_REQUEST['Direction'];
 
+			if !($_REQUEST['DialHangupCause']) {
+				$CallSid = $_REQUEST['DialALegUUID'];
+			  $DialCallSid=$_REQUEST['DialBlegUUID'];
+			  $DialCallStatus=$_REQUEST['DialHangupCause'];
+
+			  $stmt = $this->db->prepare('UPDATE calls set DialCallSid=?, DialCallStatus=? WHERE CallSid=?');
+			  $stmt->execute(array($DialCallSid, $DialCallStatus, $CallSid));
+			} else {
+			  //https://www.fullcourt.co/ja/docs/PhoneXML/request
+			  $CallSid = $_REQUEST['CallUUID'];
+			  $CallFrom=$_REQUEST['From'];
+			  $CallTo=$_REQUEST['To'];
+			  $CallStatus=$_REQUEST['CallStatus'];
+			  $Direction=$_REQUEST['Direction'];
+      }
 
 			$stmt = $this->db->prepare('INSERT INTO calls (DateCreated,CallSid,CallFrom,CallTo,CallStatus,Direction) VALUES (DATETIME(\'now\',\'localtime\'),?,?,?,?,?)');
 			$vars=array($CallSid,$CallFrom,$CallTo,$CallStatus,$Direction);
 			$stmt->execute($vars);
 		}
 
-		function save_dialed_call() {
-			$CallSid = $_REQUEST['DialALegUUID'];
-			$DialCallSid=$_REQUEST['DialBlegUUID'];
-			$DialCallStatus=$_REQUEST['DialHangupCause'];
-
-			$stmt = $this->db->prepare('UPDATE calls set DialCallSid=?, DialCallStatus=? WHERE CallSid=?');
-			$stmt->execute(array($DialCallSid, $DialCallStatus, $CallSid));
-		}
-	
 		function get_calls(){
 			$result = $this->db->query('SELECT * FROM calls ORDER BY DateCreated DESC');
 		
