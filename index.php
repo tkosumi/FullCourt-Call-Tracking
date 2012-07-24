@@ -73,9 +73,9 @@
 				?>
 			    </tbody>
 				</table>
-			<? } else { ?>
+			<?php } else { ?>
 				You haven't received any calls yet. 
-			<? } ?>
+			<?php } ?>
 				
 			<div id="footer">
 				<p><a href="https://www.fullcourt.co/">FullCourt</a></p>
