@@ -14,7 +14,7 @@
 	
 		function save_call() {
 
-			if !($_REQUEST['DialHangupCause']) {
+			if ($_REQUEST['DialHangupCause'] != "") {
 				$CallSid = $_REQUEST['DialALegUUID'];
 			  $DialCallSid=$_REQUEST['DialBlegUUID'];
 			  $DialCallStatus=$_REQUEST['DialHangupCause'];
