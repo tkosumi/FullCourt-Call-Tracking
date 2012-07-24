@@ -5,7 +5,7 @@
 	$db->save_call();
 ?>
 <Response>
-	<Dial action="http://dev.fullcourt.co/FullCourt-Call-Tracking/record_call.php" method="GET">
+	<Dial callbackUrl="http://dev.fullcourt.co/FullCourt-Call-Tracking/record_call.php" method="GET">
 		<Number><?php echo(AGENT_NUMBER);?></Number>
 	</Dial>
 </Response>
