@@ -34,12 +34,10 @@
 			    <thead>
 			    	<tr>
 			        	<th scope="col" class="rounded-company">Date</th>
-			            <th scope="col" class="rounded-q1">Campaign</th>
 			            <th scope="col" class="rounded-q1">From</th>
 			            <th scope="col" class="rounded-q1">To</th>
 			            <th scope="col" class="rounded-q1">Duration (seconds)</th>
 			            <th scope="col" class="rounded-q1">Agent Call</th>
-			            <th scope="col" class="rounded-q4">Recording</th>
 			        </tr>
 			    </thead>
 			    <tbody>
@@ -53,15 +51,11 @@
 
 						echo("<tr>");
 						echo("<td nowrap>" . $call['DateCreated']. "</td>");
-						echo("<td>" . $campaign . "</td>");
 						echo("<td>" . $call['CallFrom']. "</td>");
 						echo("<td>" . $call['CallTo']. "</td>");
 						echo("<td>" . $call['DialCallDuration']. "</td>");
 						echo("<td>" . $call['DialCallStatus']. "</td>");
-						if ($call['RecordingUrl']!="")
-							echo("<td><audio src=\"" . $call['RecordingUrl']. "\" controls preload=\"auto\" autobuffer style=\"width:10em;\"></audio></td>");
-						else
-							echo("<td></td>");
+						echo("<td></td>");
 						echo("</tr>");
 					}
 				?>
