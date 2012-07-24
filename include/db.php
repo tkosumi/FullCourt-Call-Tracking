@@ -23,11 +23,11 @@
 			  $stmt->execute(array($DialCallSid, $DialCallStatus, $CallSid));
 			} else {
 			  //https://www.fullcourt.co/ja/docs/PhoneXML/request
-			  $CallSid = $_GET['CallUUID'];
-			  $CallFrom=$_GET['From'];
-			  $CallTo=$_GET['To'];
-			  $CallStatus=$_GET['CallStatus'];
-			  $Direction=$_GET['Direction'];
+			  $CallSid = $_POST['CallUUID'];
+			  $CallFrom=$_POST['From'];
+			  $CallTo=$_POST['To'];
+			  $CallStatus=$_POST['CallStatus'];
+			  $Direction=$_POST['Direction'];
       }
 
 			$stmt = $this->db->prepare('INSERT INTO calls (DateCreated,CallSid,CallFrom,CallTo,CallStatus,Direction) VALUES (DATETIME(\'now\',\'localtime\'),?,?,?,?,?)');
