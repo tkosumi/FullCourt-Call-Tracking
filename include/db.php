@@ -22,7 +22,7 @@
 
 
 			$stmt = $this->db->prepare('INSERT INTO calls (DateCreated,CallSid,CallFrom,CallTo,CallStatus,Direction) VALUES (DATETIME(\'now\',\'localtime\'),?,?,?,?,?)');
-			$vars=array($CallSid,$AccountSid,$CallFrom,$CallTo,$CallStatus,$ApiVersion,$Direction,$FromCity,$FromState,$FromZip,$FromCountry,$ToCity,$ToState,$ToZip,$ToCountry);
+			$vars=array($CallSid,$AccountSid,$CallFrom,$CallTo,$CallStatus,$Direction);
 			$stmt->execute($vars);
 		}
 
@@ -45,12 +45,8 @@
 				$call['CallSid'] = $row['CallSid'];
 				$call['CallFrom'] = $row['CallFrom'];
 				$call['CallTo'] = $row['CallTo'];
-				$call['FromCity'] = $row['FromCity'];
-				$call['FromState'] = $row['FromState'];
-				$call['FromZip'] = $row['FromZip'];
 				$call['DialCallDuration'] = $row['DialCallDuration'];
 				$call['DialCallStatus'] = $row['DialCallStatus'];
-				$call['RecordingUrl'] = $row['RecordingUrl'];
 				$call['DateCreated'] = $row['DateCreated'];
 				$calls[] = $call;
 			}
