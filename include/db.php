@@ -1,7 +1,7 @@
 <?php
 
 	class DB {
-		const DB_NAME = '/var/www/html/calls.sqlite';
+		const DB_NAME = '/var/www/html/FullCourt-Call-Tracking/calls.sqlite';
 		protected $db;
 
 		function __construct() {
