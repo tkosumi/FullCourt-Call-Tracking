@@ -26,9 +26,9 @@
 
   			$stmt = $this->db->prepare('INSERT INTO calls (DateCreated,CallSid,CallFrom,CallTo,CallStatus,Direction,CallerName,DialCallDuration) VALUES (DATETIME(\'now\',\'localtime\'),?,?,?,?,?,?,?)');
 		  	$vars=array($CallSid,$CallFrom,$CallTo,$CallStatus,$Direction,$CallerName,$DialCallDuration);
-			  $stmt->execute($vars);
+				$stmt->execute($vars);
 		  } else {
-		  	$DialCallDuration=$_REQUEST['variable_billsec'];
+		  	$DialCallDuration=$_POST['variable_billsec'];
 				$CallSid = $_POST['CallUUID'];
 			  $DialCallSid=$_POST['DialBlegUUID'];
 			  $CallStatus=$_POST['DialBLegStatus'];
