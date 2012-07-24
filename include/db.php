@@ -22,7 +22,7 @@
 
 
 			$stmt = $this->db->prepare('INSERT INTO calls (DateCreated,CallSid,CallFrom,CallTo,CallStatus,Direction) VALUES (DATETIME(\'now\',\'localtime\'),?,?,?,?,?)');
-			$vars=array($CallSid,$AccountSid,$CallFrom,$CallTo,$CallStatus,$Direction);
+			$vars=array($CallSid,$CallFrom,$CallTo,$CallStatus,$Direction);
 			$stmt->execute($vars);
 		}
 
