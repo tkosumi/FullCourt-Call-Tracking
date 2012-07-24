@@ -14,10 +14,10 @@
 	
 		function save_call() {
 
-			if ($_POST['DialHangupCause'] != '') {
+			if ($_POST['DialBLegHangupCause'] != '') {
 				$CallSid = $_POST['DialALegUUID'];
 			  $DialCallSid=$_POST['DialBlegUUID'];
-			  $DialCallStatus=$_POST['DialHangupCause'];
+			  $DialCallStatus=$_POST['DialBLegHangupCause'];
 
 			  $stmt = $this->db->prepare('UPDATE calls set DialCallSid=?, DialCallStatus=? WHERE CallSid=?');
 			  $stmt->execute(array($DialCallSid, $DialCallStatus, $CallSid));
